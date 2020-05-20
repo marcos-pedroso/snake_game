@@ -7,6 +7,8 @@ let box = 32; //32px cada quadrado
 
 //object that represents snake
 let snake = [];
+
+//snake[0] is the snake head
 snake[0] = {
     x: 8 * box,
     y: 8 * box
@@ -55,6 +57,14 @@ function initGame(){
     if ((snake[0].x < 0) && (direction == "left")) snake[0].x = 16 * box;
     if ((snake[0].y > 15 * box) && (direction == "down")) snake[0].y = 0;
     if ((snake[0].y < 0) && (direction == "up")) snake[0].y = 16 * box;
+
+    //check if the snake's head hit its body. if true, Game Over
+    for (i = 1; i < snake.length ;i++){
+        if ((snake[0].x == snake[i].x) && (snake[0].y == snake[i].y)){
+            clearInterval(game);
+            alert("Game Over :(");
+        }
+    }
 
     createBackground();
     createSnake();
